@@ -17,7 +17,6 @@ android {
     }
 }
 
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/zxing.jar')
