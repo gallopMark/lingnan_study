@@ -39,7 +39,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 创建日期：2017/4/6 on 14:44
+ * 创建日期：2017/2/4 on 14:55
  * 描述:
  * 作者:马飞奔 Administrator
  */
@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     TextView forget_password;
     private boolean requestUN = true, remember;
 
+
     /**
      * 用户名和密码过滤空格符号和回车符号
      */
@@ -77,7 +78,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public int setLayoutResID() {
-        return R.layout.activity_lingnan_login;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -87,9 +88,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         forget_password.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // 下划线
         forget_password.getPaint().setAntiAlias(true);// 抗锯齿
         et_userName.setText(getAccount());
-        et_passWord.setText(getPassWord());
-        appCheckBox.setChecked(isRemember(), false);
+        remember = isRemember();
+        if (remember)
+            et_passWord.setText(getPassWord());
+        appCheckBox.setChecked(remember, false);
         et_userName.setSelection(et_userName.getText().length());
+//        controlKeyboardLayout(scrollView, bottomView);
         controlKeyboardLayout();
     }
 
@@ -127,11 +131,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             et_userName.clearFocus();
             et_passWord.requestFocus();
         }
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override
@@ -199,19 +198,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void showInfoDialog() {
-        MaterialDialog dialog = new MaterialDialog(context);
-        dialog.setTitle("提示");
-        dialog.setMessage("请选择正确版本的App登录");
-        dialog.setPositiveButton("我知道了", new MaterialDialog.ButtonClickListener() {
-            @Override
-            public void onClick(View v, AlertDialog dialog) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     private void login(final String userName, final String passWord) {
         final LoadingDialog loading = new LoadingDialog(context, "正在登录");
         loading.setCanceledOnTouchOutside(false);
@@ -230,11 +216,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         bt_login.setEnabled(true);
                         if (result != null && result.getResponseData() != null && result.getResponseData().getRole() != null
                                 && result.getResponseData().getRole().contains(student)) {
-                            saveUserInfo(result);
+                            saveUserInfo(result.getResponseData());
                             Intent intent = new Intent(context, AppHomePageActivity.class);
                             startActivity(intent);
                             finish();
-                            return;
                         } else {
                             showInfoDialog();
                         }
@@ -256,37 +241,43 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         return OkHttpClientManager.getInstance().login(context, url, userName, passWord);
     }
 
+    private void showInfoDialog() {
+        MaterialDialog dialog = new MaterialDialog(context);
+        dialog.setTitle("提示");
+        dialog.setMessage("请选择正确版本的App登录");
+        dialog.setPositiveButton("我知道了", new MaterialDialog.ButtonClickListener() {
+            @Override
+            public void onClick(View v, AlertDialog dialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
     /**
      * 保存用户信息
-     *
-     * @param result
      */
-    private void saveUserInfo(LoginResult result) {
-        if (result == null && result.getResponseData() != null) {
-            MobileUser user = result.getResponseData();
-            if (user != null) {
-                SharePreferenceHelper sharePreferenceHelper = new SharePreferenceHelper(context);
-                Map<String, Object> map = new HashMap<>();
-                map.put("avatar", user.getAvatar());
-                map.put("id", user.getId());
-                map.put("account", et_userName.getText().toString());
-                if (remember) {
-                    map.put("firstLogin", false);
-                    map.put("remember", true);
-                } else {
-                    map.put("firstLogin", true);
-                    map.put("remember", false);
-                }
-                if (user.getRealName() != null)
-                    map.put("realName", user.getRealName());
-                else
-                    map.put("realName", user.getUserName());
-                map.put("password", et_passWord.getText().toString());
-                map.put("userName", user.getUserName());
-                map.put("deptName", user.getDeptName());
-                map.put("role", user.getRole());
-                sharePreferenceHelper.saveSharePreference(map);
-            }
+    private void saveUserInfo(MobileUser user) {
+        SharePreferenceHelper sharePreferenceHelper = new SharePreferenceHelper(context);
+        Map<String, Object> map = new HashMap<>();
+        map.put("avatar", user.getAvatar());
+        map.put("id", user.getId());
+        map.put("account", et_userName.getText().toString());
+        if (remember) {
+            map.put("firstLogin", false);
+            map.put("remember", true);
+        } else {
+            map.put("firstLogin", true);
+            map.put("remember", false);
         }
+        if (user.getRealName() != null)
+            map.put("realName", user.getRealName());
+        else
+            map.put("realName", user.getUserName());
+        map.put("password", et_passWord.getText().toString());
+        map.put("userName", user.getUserName());
+        map.put("deptName", user.getDeptName());
+        map.put("role", user.getRole());
+        sharePreferenceHelper.saveSharePreference(map);
     }
 }
