@@ -411,10 +411,10 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-       /* if (window != null && window.isShowing()) {
+        if (window != null && window.isShowing()) {
             window.dismiss();
         }
-        unregisterReceiver(netReceiver);
+       /*   unregisterReceiver(netReceiver);
         updateVideoTime(length);
         mVideoView.stopPlayback();
         videoHandler.removeCallbacksAndMessages(null);
@@ -423,6 +423,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
     private long seekTime;
     private double interval;//更新时间间隔
+
     private void initContent() {
         mVideoPath = getIntent().getStringExtra("videoUrl");
         summary = getIntent().getStringExtra("summary");
