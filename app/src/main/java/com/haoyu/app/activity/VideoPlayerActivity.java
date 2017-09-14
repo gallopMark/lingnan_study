@@ -411,14 +411,14 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (window != null && window.isShowing()) {
+       /* if (window != null && window.isShowing()) {
             window.dismiss();
         }
         unregisterReceiver(netReceiver);
         updateVideoTime(length);
         mVideoView.stopPlayback();
         videoHandler.removeCallbacksAndMessages(null);
-        myOrientationListener.disable();
+        myOrientationListener.disable();*/
     }
 
     private long seekTime;
