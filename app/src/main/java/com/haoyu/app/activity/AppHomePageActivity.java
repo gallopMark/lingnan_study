@@ -415,7 +415,6 @@ public class AppHomePageActivity extends BaseActivity implements View.OnClickLis
 
     private void showDialog(String state) {
         MaterialDialog tipDialog = new MaterialDialog(context);
-        tipDialog.setTitle("提示");
         String message;
         if (state != null && state.equals("未开始"))
             message = "课程尚未开放";
@@ -424,7 +423,7 @@ public class AppHomePageActivity extends BaseActivity implements View.OnClickLis
         else if (state != null && state.equals("nopass"))
             message = "您的选课审核不通过";
         else
-            message = "无法进行此门课程的学习";
+            message = "课程尚未开放";
         tipDialog.setTitle("温馨提示");
         tipDialog.setMessage(message);
         tipDialog.setPositiveTextColor(ContextCompat.getColor(context, R.color.defaultColor));
