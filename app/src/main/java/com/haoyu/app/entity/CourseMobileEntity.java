@@ -40,9 +40,6 @@ public class CourseMobileEntity implements Serializable {
     @SerializedName("intro")
     @Expose
     private String intro;
-    @SerializedName("timePeriod")
-    @Expose
-    private TimePeriod timePeriod;
     @SerializedName("mTimePeriod")
     @Expose
     private TimePeriod mTimePeriod;
@@ -165,14 +162,6 @@ public class CourseMobileEntity implements Serializable {
 
     public void setTermNo(String termNo) {
         this.termNo = termNo;
-    }
-
-    public TimePeriod getTimePeriod() {
-        return timePeriod;
-    }
-
-    public void setTimePeriod(TimePeriod timePeriod) {
-        this.timePeriod = timePeriod;
     }
 
     public TimePeriod getmTimePeriod() {
