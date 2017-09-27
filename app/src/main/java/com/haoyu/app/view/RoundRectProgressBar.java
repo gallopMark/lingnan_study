@@ -19,6 +19,21 @@ public class RoundRectProgressBar extends ProgressBar {
     private int mProgressBackgroundColor = getResources().getColor(R.color.spaceColor);//default value
     private Paint mPaint;
 
+    public int getmProgressColor() {
+        return mProgressColor;
+    }
+
+    public void setmProgressColor(int mProgressColor) {
+        this.mProgressColor = mProgressColor;
+    }
+
+    public int getmProgressBackgroundColor() {
+        return mProgressBackgroundColor;
+    }
+
+    public void setmProgressBackgroundColor(int mProgressBackgroundColor) {
+        this.mProgressBackgroundColor = mProgressBackgroundColor;
+    }
 
     public RoundRectProgressBar(Context context) {
         this(context, null);
@@ -72,6 +87,5 @@ public class RoundRectProgressBar extends ProgressBar {
         }
 
         canvas.restore();
-
     }
 }
