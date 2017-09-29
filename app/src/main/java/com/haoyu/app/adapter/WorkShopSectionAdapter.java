@@ -5,7 +5,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haoyu.app.basehelper.BaseArrayRecyclerAdapter;
@@ -70,23 +69,24 @@ public class WorkShopSectionAdapter extends BaseArrayRecyclerAdapter<MWorkshopSe
         } else {
             holder.setText(R.id.tv_researchTime, "研修时间：未知");
         }
+        final ImageView iv_isExpand = holder.obtainView(R.id.iv_isExpand);
         final RecyclerView recyclerView = holder.obtainView(R.id.recyclerView);
         recyclerView.setNestedScrollingEnabled(false);
         FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(context);
         layoutManager.setOrientation(FullyLinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        final LinearLayout ll_visiable = holder.obtainView(R.id.ll_visiable);
         WorkShopActivityAdapter adapter = new WorkShopActivityAdapter(entity.getActivities());
         recyclerView.setAdapter(adapter);
-        if (hashMap.get(position) != null && hashMap.get(position) == true)
-            recyclerView.setVisibility(View.VISIBLE);
+        if (entity.getActivities().size() > 0)
+            iv_isExpand.setVisibility(View.VISIBLE);
         else
-            recyclerView.setVisibility(View.GONE);
-        if (entity.getActivities() != null && entity.getActivities().size() > 0
-                && hashMap.get(position) != null && hashMap.get(position) == false) {
-            ll_visiable.setVisibility(View.VISIBLE);
+            iv_isExpand.setVisibility(View.GONE);
+        if (hashMap.get(position) != null && hashMap.get(position)) {
+            recyclerView.setVisibility(View.VISIBLE);
+            iv_isExpand.setImageResource(R.drawable.course_dictionary_xiala);
         } else {
-            ll_visiable.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            iv_isExpand.setImageResource(R.drawable.progress_goto);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,15 +94,11 @@ public class WorkShopSectionAdapter extends BaseArrayRecyclerAdapter<MWorkshopSe
                 if (recyclerView.getVisibility() == View.VISIBLE) {
                     hashMap.put(position, false);
                     recyclerView.setVisibility(View.GONE);
+                    iv_isExpand.setImageResource(R.drawable.progress_goto);
                 } else {
                     hashMap.put(position, true);
                     recyclerView.setVisibility(View.VISIBLE);
-                }
-                if (entity.getActivities() != null && entity.getActivities().size() > 0
-                        && hashMap.get(position) != null && hashMap.get(position) == false) {
-                    ll_visiable.setVisibility(View.VISIBLE);
-                } else {
-                    ll_visiable.setVisibility(View.GONE);
+                    iv_isExpand.setImageResource(R.drawable.course_dictionary_xiala);
                 }
             }
         });
