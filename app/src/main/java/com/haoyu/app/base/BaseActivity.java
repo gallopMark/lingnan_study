@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.haoyu.app.dialog.LoadingDialog;
 import com.haoyu.app.dialog.MaterialDialog;
 import com.haoyu.app.dialog.PublicTipDialog;
-import com.haoyu.app.lingnan.student.R;
 import com.haoyu.app.rxBus.MessageEvent;
 import com.haoyu.app.rxBus.RxBus;
 import com.haoyu.app.utils.Constants;
@@ -152,18 +151,28 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void toast(Context context, String text) {
+        View v = LayoutInflater.from(context).inflate(R.layout.app_layout_toast, null);
+        TextView textView = v.findViewById(R.id.tv_text);
+        textView.setText(text);
         if (mToast == null) {
-            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-        } else {
-            mToast.setText(text);
+            mToast = new Toast(context);
             mToast.setDuration(Toast.LENGTH_LONG);
-        }
+            mToast.setView(v);
+        } else
+            mToast.setView(v);
         mToast.show();
+    }
+
+    public void cancelToast() {
+        if (mToast != null) {
+            mToast.cancel();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        cancelToast();
         unRegistRxBus();
         unsubscribe();
         ExitApplication.getInstance().remove(this);

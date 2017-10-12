@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haoyu.app.dialog.PublicTipDialog;
-import com.haoyu.app.lingnan.student.R;
 import com.haoyu.app.rxBus.MessageEvent;
 import com.haoyu.app.rxBus.RxBus;
 import com.haoyu.app.utils.Constants;
@@ -93,12 +92,15 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void toast(String text) {
+        View v = LayoutInflater.from(context).inflate(R.layout.app_layout_toast, null);
+        TextView textView = v.findViewById(R.id.tv_text);
+        textView.setText(text);
         if (mToast == null) {
-            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-        } else {
-            mToast.setText(text);
+            mToast = new Toast(context);
             mToast.setDuration(Toast.LENGTH_LONG);
-        }
+            mToast.setView(v);
+        } else
+            mToast.setView(v);
         mToast.show();
     }
 
