@@ -13,7 +13,7 @@ import com.haoyu.app.activity.TeachingResearchATActivity;
 import com.haoyu.app.basehelper.BaseArrayRecyclerAdapter;
 import com.haoyu.app.entity.TeachingMovementEntity;
 import com.haoyu.app.imageloader.GlideImgManager;
-import com.haoyu.app.lego.teach.R;
+import com.haoyu.app.lingnan.student.R;
 import com.haoyu.app.utils.ScreenUtils;
 import com.haoyu.app.utils.TimeUtil;
 
