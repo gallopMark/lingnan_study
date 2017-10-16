@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,13 +10,14 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:left_button_image="@drawable/app_back"
-        app:title_text="听课评课" />
+        app:left_button_image="@drawable/app_back" />
 
     <com.haoyu.app.view.StickyScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_below="@+id/toolBar"
         android:fillViewport="true"
         android:overScrollMode="never"
         android:scrollbars="none">
@@ -58,6 +59,7 @@
                     android:id="@+id/tv_activity_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
 
@@ -72,6 +74,7 @@
                     android:id="@+id/tv_subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
             </LinearLayout>
@@ -86,6 +89,7 @@
                     android:id="@+id/tv_lecture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
 
@@ -100,58 +104,9 @@
                     android:id="@+id/tv_bookversion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_fileLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_size_1"
-                    android:background="@color/spaceColor" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/biaotiyuan"
-                        android:drawablePadding="@dimen/margin_size_5"
-                        android:padding="@dimen/margin_size_12"
-                        android:text="相关文档"
-                        android:textSize="@dimen/font_size_16" />
-
-                    <LinearLayout
-                        android:id="@+id/fileIndicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/margin_size_10"
-                        android:gravity="right"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_size_1"
-                    android:background="@color/spaceColor" />
-
-                <com.haoyu.app.view.DecoratorViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    android:overScrollMode="never" />
             </LinearLayout>
 
             <LinearLayout
@@ -202,36 +157,119 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:tag="sticky-nonconstant-hastransparancy">
+                android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_size_1"
-                    android:background="@color/spaceColor" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/announcements_yuandian"
-                    android:drawablePadding="@dimen/margin_size_6"
-                    android:padding="@dimen/margin_size_12"
-                    android:text="评课方向"
-                    android:textSize="@dimen/font_size_16" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_size_1"
-                    android:background="@color/spaceColor" />
-
-                <org.sufficientlysecure.htmltextview.HtmlTextView
-                    android:id="@+id/htv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/margin_size_12"
-                    android:textColor="@color/gray" />
+                    android:tag="sticky-nonconstant-hastransparancy">
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_size_1"
+                        android:background="@color/spaceColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_size_12">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/margin_size_6"
+                            android:src="@drawable/biaotiyuan" />
+
+                        <TextView
+                            android:id="@+id/tv_evaluation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawablePadding="@dimen/margin_size_6"
+                            android:text="评课方向"
+                            android:textSize="@dimen/font_size_16" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_size_1"
+                        android:background="@color/spaceColor" />
+                </LinearLayout>
+
+                <org.sufficientlysecure.htmltextview.HtmlTextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/margin_size_4"
+                    android:padding="@dimen/margin_size_12"
+                    android:textSize="@dimen/font_size_16"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fileLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:tag="sticky-nonconstant-hastransparancy">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_size_1"
+                        android:background="@color/spaceColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_size_12">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/margin_size_6"
+                            android:src="@drawable/biaotiyuan" />
+
+                        <TextView
+                            android:id="@+id/tv_fileLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/margin_size_6"
+                            android:gravity="left|center"
+                            android:text="相关文档"
+                            android:textSize="@dimen/font_size_16" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_size_1"
+                        android:background="@color/spaceColor" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_file"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -248,7 +286,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="已有："
+                    android:drawableLeft="@drawable/discussion_pinglun"
+                    android:drawablePadding="@dimen/margin_size_6"
+                    android:text="已有 "
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
 
@@ -266,7 +306,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="条评论"
+                    android:text=" 条回复"
                     android:textColor="@color/blow_gray"
                     android:textSize="@dimen/font_size_16" />
             </LinearLayout>
@@ -382,8 +422,10 @@
     </com.haoyu.app.view.StickyScrollView>
 
     <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -473,4 +515,4 @@
                 android:textSize="@dimen/font_size_18" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
