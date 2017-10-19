@@ -667,16 +667,10 @@ public class AppHomePageActivity extends BaseActivity implements View.OnClickLis
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if ((result.startsWith("http") || result.startsWith("https"))) {  //扫一扫签到
-            if (result.contains(Constants.REFERER))
-                signedOn(result);
-            else {
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("url", result);
-                startActivity(intent);
-            }
+        } else if ((result.startsWith("http") || result.startsWith("https")) && result.contains(Constants.REFERER)) {
+            signedOn(result);
         } else {
-            showMaterialDialog("扫描结果", result);
+            showMaterialDialog("提示", "非本应用规定的二维码");
         }
     }
 

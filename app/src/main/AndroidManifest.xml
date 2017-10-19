@@ -59,10 +59,6 @@
         <activity android:name="com.haoyu.app.activity.AppCaptureActivity" />
 
         <activity android:name="com.haoyu.app.activity.AppHomePageActivity" />
-        <activity
-            android:name="com.haoyu.app.activity.WebActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.haoyu.app.activity.AppUserInfoActivity" />
         <!--登录，忘记密码，重置密码，问题反馈-->
         <activity
